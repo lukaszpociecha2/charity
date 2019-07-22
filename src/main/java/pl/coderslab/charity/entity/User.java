@@ -1,8 +1,13 @@
 package pl.coderslab.charity.entity;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -14,8 +19,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    String firstName;
+
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    String lastName;
+
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    @Email
     String username;
-    String email;
+
+    @NotNull
+    @NotEmpty
+    @NotBlank
     String password;
     private int enabled;
 

@@ -93,59 +93,8 @@
                 <!--<label th:for="${#ids.prev('features')}"
                        th:text="#{${'seedstarter.feature.' + feat}}">Heating</label>-->
               </li>
+              <p th:if="${#fields.hasErrors('categories')}" class="alert alert-danger">Wybierz co chcesz podarować</p>
             </ul>
-
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  name="categories"
-                  value="clothes-to-use"
-                />
-                <span class="checkbox"></span>
-                <span class="description"
-                  >ubrania, które nadają się do ponownego użycia</span
-                >
-              </label>
-            </div>
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  name="categories"
-                  value="clothes-useless"
-                />
-                <span class="checkbox"></span>
-                <span class="description">ubrania, do wyrzucenia</span>
-              </label>
-            </div>
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="checkbox" name="categories" value="toys" />
-                <span class="checkbox"></span>
-                <span class="description">zabawki</span>
-              </label>
-            </div>
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="checkbox" name="categories" value="books" />
-                <span class="checkbox"></span>
-                <span class="description">książki</span>
-              </label>
-            </div>
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="checkbox" name="categories" value="other" />
-                <span class="checkbox"></span>
-                <span class="description">inne</span>
-              </label>
-            </div>
-
             <div class="form-group form-group--buttons">
               <button type="button" class="btn next-step">Dalej</button>
             </div>
@@ -160,7 +109,9 @@
                 Liczba 60l worków:
                 <input type="number" th:field="*{bags}" name="bags" step="1" min="1" />
               </label>
+              <p th:if="${#fields.hasErrors('bags')}" class="alert alert-danger">Podaj ilość worków</p>
             </div>
+
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>
@@ -186,36 +137,9 @@
                   </div>
                 </span>
                   </label>
+                  <p th:if="${#fields.hasErrors('recepient')}" th:errors="*{recepient}" class="alert alert-danger">Choose institution</p>
                 </div>
               </div>
-            <!--  <div class="form-group form-group&#45;&#45;checkbox">
-              <label>
-                <input type="radio" name="organization" value="Fundacja 'Bez domu'" />
-                <span class="checkbox radio"></span>
-                <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
-                  </div>
-                </span>
-              </label>
-            </div>
-
-            <div class="form-group form-group&#45;&#45;checkbox">
-              <label>
-                <input type="radio" name="organization" value="Fundacja 'Dla Dzieci'" />
-                <span class="checkbox radio"></span>
-                <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-              </label>
-            </div>-->
-
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>
               <button type="button" class="btn next-step">Dalej</button>
@@ -231,22 +155,26 @@
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
                   <label> Ulica <input type="text" th:field="*{pickupData.donatorAddress.cityAddress}" th:name="cityAddress" /> </label>
+                  <p th:if="${#fields.hasErrors('pickupData.donatorAddress.cityAddress')}" class="alert alert-danger">Proszę podać adres odbioru</p>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Miasto <input type="text" th:field="*{pickupData.donatorAddress.city}" name="city" /> </label>
+                  <label> Miasto <input type="text" th:field="*{pickupData.donatorAddress.city}" th:name="city"name="city"/></label>
+                  <p th:if="${#fields.hasErrors('pickupData.donatorAddress.city')}" class="alert alert-danger">Proszę podać kod miasto</p>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Kod pocztowy <input type="text" th:field="*{pickupData.donatorAddress.postcode}" name="postcode" />
                   </label>
+                  <p th:if="${#fields.hasErrors('pickupData.donatorAddress.postcode')}" class="alert alert-danger">Proszę podać kod pocztowy</p>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Numer telefonu <input type="text" th:field="*{pickupData.donatorAddress.phone}" name="phone" />
                   </label>
+                  <p th:if="${#fields.hasErrors('pickupData.donatorAddress.phone')}" class="alert alert-danger">Proszę podać numer telefonu</p>
                 </div>
               </div>
 
@@ -254,10 +182,12 @@
                 <h4>Termin odbioru</h4>
                 <div class="form-group form-group--inline">
                   <label> Data <input type="date" th:field="*{pickupData.date}" name="data"/> </label>
+                  <p th:if="${#fields.hasErrors('pickupData.date')}" class="alert alert-danger">Proszę podać datę odbrioru</p>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label> Godzina <input type="time" th:field="*{pickupData.time}" name="time" /> </label>
+                  <p th:if="${#fields.hasErrors('pickupData.time')}" class="alert alert-danger">Proszę podać czas odbioru</p>
                 </div>
 
                 <div class="form-group form-group--inline">
@@ -330,39 +260,7 @@
     </section>
 
     <footer>
-      <div class="contact" id="contact">
-        <h2>Skontaktuj się z nami</h2>
-        <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
-          <div class="form-group form-group--50">
-            <input type="text" name="name" placeholder="Imię" />
-          </div>
-          <div class="form-group form-group--50">
-            <input type="text" name="surname" placeholder="Nazwisko" />
-          </div>
-
-          <div class="form-group">
-            <textarea
-              name="message"
-              placeholder="Wiadomość"
-              rows="1"
-            ></textarea>
-          </div>
-
-          <button class="btn" type="submit">Wyślij</button>
-        </form>
-      </div>
-      <div class="bottom-line">
-        <span class="bottom-line--copy">Copyright &copy; 2018</span>
-        <div class="bottom-line--icons">
-          <a href="#" class="btn btn--small"
-            ><img th:src="@{/images/icon-facebook.svg}"
-          /></a>
-          <a href="#" class="btn btn--small"
-            ><img th:src="@{/images/icon-instagram.svg}"
-          /></a>
-        </div>
-      </div>
+      <div th:insert="footer"></div>
     </footer>
 
     <script th:src="@{/js/app.js}"></script>

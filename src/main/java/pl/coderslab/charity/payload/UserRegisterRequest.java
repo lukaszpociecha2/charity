@@ -1,31 +1,19 @@
 package pl.coderslab.charity.payload;
 
+import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Data
 public class UserRegisterRequest {
 
-    String email;
+    String username;
+    String firstName;
+    String lastName;
+    @NotEmpty
+            @NotNull
+            @NotBlank
     String password;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "UserRegisterRequest{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

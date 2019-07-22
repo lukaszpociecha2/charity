@@ -1,12 +1,14 @@
 package pl.coderslab.charity.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 
 @Data
@@ -18,9 +20,9 @@ public class PickupData {
     Long id;
 
     @NotNull
-            @NotEmpty
-            @NotBlank
-    String date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate date;
+
     @NotNull
     @NotEmpty
     @NotBlank
@@ -29,7 +31,7 @@ public class PickupData {
     String more_info;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-            @Valid
+    @Valid
     DonatorAddress donatorAddress;
 
 }

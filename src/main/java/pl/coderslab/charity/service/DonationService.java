@@ -11,20 +11,25 @@ import pl.coderslab.charity.repository.OrganizationRepository;
 public class DonationService {
 
     private DonationRepository donationRepository;
-    private OrganizationRepository organizationRepository;
-    private CategoryRepository categoryRepository;
 
 
     @Autowired
-    public DonationService(DonationRepository donationRepository, OrganizationRepository organizationRepository, CategoryRepository categoryRepository) {
+    public DonationService(DonationRepository donationRepository) {
         this.donationRepository = donationRepository;
-        this.organizationRepository = organizationRepository;
-        this.categoryRepository = categoryRepository;
     }
 
 
     public Donation saveDonation(Donation donation){
         return donationRepository.save(donation);
     }
+
+    public Integer numberOfOrganizationsWithDontaions(){
+        return donationRepository.countSupportedInstitutions();
+    }
+
+    public Integer numberOfBags(){
+        return donationRepository.sumOfBags();
+    }
+
 
 }

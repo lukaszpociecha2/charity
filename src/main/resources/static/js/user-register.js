@@ -11,18 +11,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     var checkEmailEmpty = function () {
-        var email = document.querySelector('#email');
+        var email = document.querySelector('#username');
         email.addEventListener('change', function (ev) {
             console.log(ev.target.value.length);
             if(ev.target.value.length===0){
                 emailEmpty.hidden=false;
-            } else emailEmpty.hidden=true;
+            } else {
+                emailEmpty.hidden=true;
+                if(document.querySelector('#emailTaken')!==undefined){
+                    document.querySelector('#emailTaken').hidden=true;
+                }
+
+            }
         })
     };
 
     var passwordCheck = function(){
         let password = document.querySelector('#password');
-        let password2 = document.querySelector('input[name="password2"]');
+        let password2 = document.querySelector('#password2');
 
         var passwordValue;
         var passwordValue2;
@@ -48,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
         password2.addEventListener('keyup', function (evt) {
             console.log(evt.target.value);
             passwordValue2 = evt.target.value;
-            if (evt.target.value === passwordValue) {
+            if (evt.target.value === passwordValue && emailEmpty.hidden) {
                 newDiv.hidden = true;
                 create.disabled = false;
             } else {
@@ -61,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     var validateEmail = function(){
-        document.querySelector("#email").addEventListener("change", function (evt) {
+        document.querySelector("#username").addEventListener("change", function (evt) {
 
             var myEmail = {
                 email : evt.target.value

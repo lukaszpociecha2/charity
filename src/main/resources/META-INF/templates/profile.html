@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li><a href="/login">Zaloguj</a></li>
+            <li class="highlighted"><a href="/register">Załóż konto</a></li>
+        </ul>
+
+        <ul>
+            <li><a href="/" class="btn btn--without-border active">Start</a></li>
+            <li><a href="index.html#steps" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="index.html#about-us" class="btn btn--without-border">O nas</a></li>
+            <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="login-page">
+    <h2>Twoje konto</h2>
+
+    <p>Imię: <span th:text="${userRegisterRequest.firstName}"></span></p>
+    <p>Nazwisko: <span th:text="${userRegisterRequest.lastName}"></span></p>
+    <p>Email: <span th:text="${userRegisterRequest.username}"></span></p>
+
+    <form action="/profile" method="post" th:object="${userRegisterRequest}">
+
+        <div class="form-group">
+            <input th:field="*{firstName}" type="text" name="firstName"/>
+            <p th:if="${#fields.hasErrors('firstName')}" class="alert alert-danger">Podaj imię</p>
+        </div>
+        <div class="form-group">
+            <input th:field="*{lastName}" type="text" name="lastName" placeholder="Nazwisko" />
+            <p th:if="${#fields.hasErrors('lastName')}" class="alert alert-danger">Podaj nazwisko</p>
+        </div>
+
+        <div class="form-group">
+            <input th:field="*{username}" type="email" id="username" name="username" placeholder="Email" />
+            <!--          <p th:if="${#fields.hasErrors('username')}" class="alert alert-danger">Podaj email</p>-->
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger" id="emailTaken"></p>
+
+            <div id="emailValid" hidden="true" class="alert alert-danger">Email is already taken</div>
+            <div id="emailEmpty" class="alert alert-danger">Email cannot be empty</div>
+        </div>
+
+        <div class="form-group">
+            <input th:field="*{password}" type="password" id="password" name="password2" placeholder="Hasło" />
+            <p th:if="${#fields.hasErrors('password')}" class="alert alert-danger">Podaj hasło</p>
+        </div>
+
+        <div class="form-group">
+            <input type="password" name="password2" id="password2" placeholder="Powtórz hasło" />
+            <div id="passmatcher" class="alert alert-danger">Passwords must match</div>
+        </div>
+
+
+        <div class="form-group form-group--buttons">
+            <a href="/login" class="btn btn--without-border">Zaloguj się</a>
+            <button id="create" class="btn" type="submit" disabled>Załóż konto</button>
+        </div>
+    </form>
+</section>
+
+<footer>
+    <div th:insert="footer"></div>
+</footer>
+<script type="application/javascript" th:src="@{vendor/jquery/jquery.js}"></script>
+<script type="application/javascript" th:src="@{/js/user-register.js}"></script>
+</body>
+</html>

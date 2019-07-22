@@ -20,7 +20,7 @@ public class Donation {
     Long id;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-            @NotEmpty
+    @NotEmpty
     List<Category> categories = new ArrayList<>();
 
     @NotNull
@@ -28,12 +28,12 @@ public class Donation {
     Integer bags;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-            @NotNull
+    @NotNull
     Organization recepient;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-            @NotNull
-            @Valid
+    @NotNull
+    @Valid
     PickupData pickupData;
 
 }

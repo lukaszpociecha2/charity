@@ -26,10 +26,9 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
-    public User saveUser(UserRegisterRequest userRegisterRequest){
-        User user = new User();
-        user.setUsername(userRegisterRequest.getEmail());
-        user.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
+    public User saveUser(User user){
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));

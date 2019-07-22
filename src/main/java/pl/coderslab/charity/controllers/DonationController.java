@@ -50,13 +50,14 @@ public class DonationController {
     }
 
     @PostMapping(value = "/donate") //TODO validation
-    public String processFormModel(@Valid @ModelAttribute Donation donation, BindingResult result, RedirectAttributes attributes){
+    public String processFormModel(@Valid @ModelAttribute Donation donation, BindingResult result, Model model){
         if(result.hasErrors()){
             List<ObjectError> errorList = result.getAllErrors();
             for (ObjectError objectError : errorList) {
                 System.out.println(objectError.toString());
             }
-            return "redirect:/form-confirmation";
+            model.addAttribute("categoriesTypes", categoryService.getAllCategories());
+            return "form";
         }
 
         //Donation donation = donationService.createDonationFromPayload(donationRequest);
